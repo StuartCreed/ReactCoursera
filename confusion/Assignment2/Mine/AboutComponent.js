@@ -2,11 +2,32 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+function RenderLeader({leader}) {
+   return (
+         <React.Fragment>
+            <div className="row">
+               <div className="col col-sm col-md">
+                  <Media>
+                     <Media left top>
+                        <img className="d-flex mr-3" src={leader.image} alt="uthappizza"></img>
+                     </Media>
+                     <Media body>
+                        <Media heading>{leader.name}</Media>
+                           <p className="d-none d-sm-block">{leader.designation}</p>
+                           <p className="d-none d-sm-block">{leader.description}</p>
+                     </Media>
+                  </Media>
+               </div>
+            </div>
+         </React.Fragment>
+   );
+}
+
 function About(props) {
 
     const leaders = props.leaders.map((leader) => {
         return (
-            <p>Leader {leader.name}</p>
+            <RenderLeader leader={leader} />
         );
     });
 
@@ -74,4 +95,4 @@ function About(props) {
     );
 }
 
-export default About;    
+export default About;
