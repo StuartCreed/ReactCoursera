@@ -7,11 +7,10 @@ class Contact extends Component {
    constructor(props) {
      super(props);
 
-     this.state = {
+      this.state = {
          firstname: '',
          lastname: '',
-         telnum: '',
-         email: '',
+         telnum: '',         email: '',
          agree: false,
          contactType: 'Tel.',
          message: '',
@@ -21,7 +20,7 @@ class Contact extends Component {
             telnum: false,
             email: false
          }
-     };
+      };
 
      this.handleInputChange = this.handleInputChange.bind(this);
      this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,24 +52,25 @@ class Contact extends Component {
       };
 
       if (this.state.touched.firstname && firstname.length < 3)
-           errors.firstname = 'First Name should be >= 3 characters';
+         errors.firstname = 'First Name should be >= 3 characters';
       else if (this.state.touched.firstname && firstname.length > 10)
-           errors.firstname = 'First Name should be <= 10 characters';
+         errors.firstname = 'First Name should be <= 10 characters';
 
       if (this.state.touched.lastname && lastname.length < 3)
-           errors.lastname = 'Last Name should be >= 3 characters';
+         errors.lastname = 'Last Name should be >= 3 characters';
       else if (this.state.touched.lastname && lastname.length > 10)
-           errors.lastname = 'Last Name should be <= 10 characters';
+         errors.lastname = 'Last Name should be <= 10 characters';
 
       const reg = /^\d+$/;
       if (this.state.touched.telnum && !reg.test(telnum))
-           errors.telnum = 'Tel. Number should contain only numbers';
+         errors.telnum = 'Tel. Number should contain only numbers';
 
       if (this.state.touched.email && email.split('').filter(x => x === '@').length !== 1)
-           errors.email = 'Email should contain a @';
+         errors.email = 'Email should contain a @';
 
       return errors;
-}
+
+   }
 
 handleBlur = (field) => (evt) => {
     this.setState({
@@ -100,9 +100,7 @@ handleBlur = (field) => (evt) => {
                      <h3>Contact Us</h3>
                      <hr />
                   </div>
-               </div>
-
-
+              </div>
 
                <div className="row row-content">
                       <div className="col-12">
@@ -173,8 +171,8 @@ handleBlur = (field) => (evt) => {
                                                      <strong>May we contact you?</strong>
                                                  </Label>
                                              </FormGroup>
-                                         </Col>
-                                         <Col md={{size: 3, offset: 1}}>
+                                          </Col>
+                                          <Col md={{size: 3, offset: 1}}>
                                              <Input type="select" name="contactType"
                                                      value={this.state.contactType}
                                                      onChange={this.handleInputChange}>
