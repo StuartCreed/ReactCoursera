@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './MenuComponent';
-import DishDetail from './DishdetailComponent';
+import DishDetail from './DishDetailComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Contact from './ContactComponent'
