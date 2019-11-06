@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody,
-    CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+    CardTitle, Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-    function RenderComments({comments}){
+class CommentForm extends Component {
+   constructor (props) {
+      super(props);
+   }
+
+   render () {
+      return (
+         <div></div>
+      )
+   }
+}
+
+function RenderComments({comments}){
 
         if(comments==null){
             return(
@@ -31,11 +43,12 @@ import { Link } from 'react-router-dom';
              <ul className='list-unstyled'>
                  {cmt}
              </ul>
+             <Button outline onClick={CommentForm} type="submit"><span className="fa fa-pencil"></span> Submit Comment</Button>
          </div>
      )
     }
 
-    function RenderDish({dish}){
+function RenderDish({dish}){
         if(dish!=null){
             return(
              <div className='col-12 col-md-5 m-1'>
@@ -54,7 +67,7 @@ import { Link } from 'react-router-dom';
         }
     }
 
-    const DishDetail = (props) => {
+const DishDetail = (props) => {
 
         const dish=props.dish
         const commentsLog=props.comments;
