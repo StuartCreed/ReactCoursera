@@ -1,16 +1,53 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody,
-    CardTitle, Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
+    CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader,
+   ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 class CommentForm extends Component {
    constructor (props) {
       super(props);
+      this.state = {
+        isModalOpen: false
+      };
+
+      this.toggleModal = this.toggleModal.bind(this);
+   }
+
+   toggleModal() {
+    this.setState({
+       isModalOpen: !this.state.isModalOpen
+    });
    }
 
    render () {
       return (
-         <div></div>
+         <React.Fragment>
+         <Button outline onClick={this.toggleModal} type="submit"><span className="fa fa-pencil"></span> Submit Comment</Button>
+
+         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+             <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+             <ModalBody>
+               <Form>
+                  <FormGroup>
+                     <Label htmlFor="username">Username</Label>
+                     <Input type="text" id="username" name="username"/>
+                  </FormGroup>
+                  <FormGroup>
+                     <Label htmlFor="password">Password</Label>
+                     <Input type="password" id="password" name="password" />
+                  </FormGroup>
+                  <FormGroup check>
+                     <Label check>
+                         <Input type="checkbox" name="remember"  />
+                         Remember me
+                     </Label>
+                  </FormGroup>
+                  <Button type="submit" value="submit" color="primary">Login</Button>
+               </Form>
+             </ModalBody>
+         </Modal>
+         </React.Fragment>
       )
    }
 }
@@ -43,7 +80,8 @@ function RenderComments({comments}){
              <ul className='list-unstyled'>
                  {cmt}
              </ul>
-             <Button outline onClick={CommentForm} type="submit"><span className="fa fa-pencil"></span> Submit Comment</Button>
+             <CommentForm />
+
          </div>
      )
     }
