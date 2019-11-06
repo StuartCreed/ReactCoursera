@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody,
     CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader,
-   ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
+   ModalBody, Form, FormGroup, Input, Label, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Control, LocalForm, Errors } from 'react-redux-form';
+
+const required = (val) => val && val.length;
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const minLength = (len) => (val) => val && (val.length >= len);
 
 class CommentForm extends Component {
    constructor (props) {
@@ -20,31 +25,60 @@ class CommentForm extends Component {
     });
    }
 
+   handleSubmit(values) {
+       console.log('Current State is: ' + JSON.stringify(values));
+       alert('Current State is: ' + JSON.stringify(values));
+       // event.preventDefault();
+   }
+
    render () {
       return (
          <React.Fragment>
          <Button outline onClick={this.toggleModal} type="submit"><span className="fa fa-pencil"></span> Submit Comment</Button>
 
          <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-             <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+             <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
              <ModalBody>
-               <Form>
+               <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                   <FormGroup>
-                     <Label htmlFor="username">Username</Label>
-                     <Input type="text" id="username" name="username"/>
+                     <Label htmlFor="rating">Rating</Label>
+                     <Control.select model=".rating" name="rating"
+                        className="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                     </Control.select>
                   </FormGroup>
                   <FormGroup>
-                     <Label htmlFor="password">Password</Label>
-                     <Input type="password" id="password" name="password" />
+                     <Label htmlFor="author">Your Name</Label>
+                     <Control.text model=".author" id="author" name="author"
+                        placeholder="Your Name"
+                        className="form-control"
+                        validators={{
+                           required, minLength: minLength(3), maxLength: maxLength(15)
+                        }}
+                     />
+                     <Errors
+                        className="text-danger"
+                        model=".author"
+                        show="touched"
+                        messages={{
+                             required: 'Required ',
+                             minLength: 'Must be greater than 3 characters',
+                             maxLength: 'Must be 15 characters or less'
+                        }}
+                     />
                   </FormGroup>
-                  <FormGroup check>
-                     <Label check>
-                         <Input type="checkbox" name="remember"  />
-                         Remember me
-                     </Label>
+                  <FormGroup>
+                     <Label htmlFor="comment">Comment</Label>
+                     <Control.textarea model=".comment" id="comment" name="comment"
+                         rows="6"
+                         className="form-control" />
                   </FormGroup>
-                  <Button type="submit" value="submit" color="primary">Login</Button>
-               </Form>
+                  <Button type="submit" value="submit" color="primary">Submit</Button>
+               </LocalForm>
              </ModalBody>
          </Modal>
          </React.Fragment>
@@ -81,7 +115,6 @@ function RenderComments({comments}){
                  {cmt}
              </ul>
              <CommentForm />
-
          </div>
      )
     }
