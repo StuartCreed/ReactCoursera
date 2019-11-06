@@ -4,8 +4,11 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
 import { Link } from 'react-router-dom';
 
     function RenderComments({comments}){
+
         if(comments==null){
-            return(<div></div>)
+            return(
+               <div>empty</div>
+            )
         }
 
        const cmt=comments.map(comment => {
@@ -54,9 +57,14 @@ import { Link } from 'react-router-dom';
     const DishDetail = (props) => {
 
         const dish=props.dish
+        const commentsLog=props.comments;
+        console.log("dishis")
+        console.log(dish);
+        console.log("commentsLog")
+        console.log(commentsLog);
 
-        if(dish==null){
-            return (<div></div>)
+        if(dish===null){
+            return (<div>empty</div>)
         }
 
         return (
@@ -79,7 +87,7 @@ import { Link } from 'react-router-dom';
                 </div>
                 <div className="row">
                     <RenderDish dish={props.dish} />
-                    <RenderComments comments={dish.comments}/>
+                    <RenderComments comments={props.comments} />
                 </div>
            </div>
         )

@@ -11,6 +11,8 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import About from './AboutComponent';
 
+/*comments={this.props.comments[0].comment}*/
+
 const mapStateToProps = (state) => {
   return {
     dishes: state.dishes,
@@ -38,7 +40,7 @@ class Main extends Component {
          return(
             <DishDetail
                dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
-               comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))[0]}
+               comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
             />
          );
       }
