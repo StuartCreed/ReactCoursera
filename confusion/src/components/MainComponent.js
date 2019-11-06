@@ -11,8 +11,6 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import About from './AboutComponent';
 
-/*comments={this.props.comments[0].comment}*/
-
 const mapStateToProps = (state) => {
   return {
     dishes: state.dishes,

@@ -26,7 +26,7 @@ export const COMMENTS =
     },
     {
         id: 3,
-        dishId: 0,   
+        dishId: 0,
         rating: 4,
         comment: "Ultimate, Reaching for the stars!",
         author: "Ringo Starry",
