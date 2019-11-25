@@ -2,8 +2,15 @@ import React from 'react';
 import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform } from 'react-animation-components';
 
 function RenderCard({item, isLoading, errMess}) {
+   console.log("item is:")
+   console.log({item});
+   console.log("isLoading is:")
+   console.log({isLoading});
+   console.log("errMess is:");
+   console.log({errMess});
    if (isLoading) {
    return(
            <Loading />
