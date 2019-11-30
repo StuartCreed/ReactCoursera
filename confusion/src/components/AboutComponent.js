@@ -1,15 +1,28 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
+
+/*OLD code
+const leaders = props.leaders.map((item) => {
+    console.log("ABOUT LEADERS IS ", item)
+    return (
+        <RenderLeader leader={item.leaders} />
+    );
+});
+
+*/
 
 function RenderLeader({leader}) {
+   console.log("ACTUALLY IN RENDER LEADER", leader)
    return (
          <React.Fragment>
             <div className="row">
                <div className="col col-sm col-md">
                   <Media>
                      <Media left top>
-                        <img className="d-flex mr-3" src={leader.image} alt="uthappizza"></img>
+                        <img className="d-flex mr-3" src={baseUrl + leader.image} alt="uthappizza"></img>
                      </Media>
                      <Media body>
                         <Media heading>{leader.name}</Media>
@@ -23,13 +36,47 @@ function RenderLeader({leader}) {
    );
 }
 
+/*WORK IN PROGRESS
+
+
+*/
+
+/*Error/Loading Wrapper for RenderLeader*/
+function LeadersHandler({leaders}) {
+
+
+
+   /*if (isLoading) {
+      return(
+              <Loading />
+      );
+   }
+
+   else if (errMess) {
+      return(
+              <h4>{errMess}</h4>
+      );
+   }
+
+   else*/
+
+      return(
+         <div></div>
+      )
+}
+
+/*WORK IN PROGRESS*/
+
+
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
-        return (
-            <RenderLeader leader={leader} />
-        );
-    });
+   const leaders = props.leaders.map((item) => {
+       console.log("ABOUT LEADERS IS ", item)
+       return (
+           <RenderLeader leader={item} />
+       );
+   });
+
 
     return(
         <div className="container">
