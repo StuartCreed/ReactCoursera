@@ -4,16 +4,6 @@ import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
 
-/*OLD code
-const leaders = props.leaders.map((item) => {
-    console.log("ABOUT LEADERS IS ", item)
-    return (
-        <RenderLeader leader={item.leaders} />
-    );
-});
-
-*/
-
 function RenderLeader({leader}) {
    console.log("ACTUALLY IN RENDER LEADER", leader)
    return (
@@ -63,7 +53,6 @@ function LeadersHandler({leadersLoaded, isLoading, errMess}) {
          <div>{leadersLoaded}</div>
       )
 }
-
 
 function About(props) {
 
