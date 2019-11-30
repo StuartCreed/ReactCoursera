@@ -42,11 +42,11 @@ function RenderLeader({leader}) {
 */
 
 /*Error/Loading Wrapper for RenderLeader*/
-function LeadersHandler({leaders}) {
+function LeadersHandler({leadersLoaded, isLoading, errMess}) {
 
 
 
-   /*if (isLoading) {
+   if (isLoading) {
       return(
               <Loading />
       );
@@ -58,14 +58,11 @@ function LeadersHandler({leaders}) {
       );
    }
 
-   else*/
-
+   else
       return(
-         <div></div>
+         <div>{leadersLoaded}</div>
       )
 }
-
-/*WORK IN PROGRESS*/
 
 
 function About(props) {
@@ -134,7 +131,7 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        {leaders}
+                        <LeadersHandler leadersLoaded={leaders} isLoading={props.leadersLoading} errMess={props.leaderErrMess}/>
                     </Media>
                 </div>
             </div>
