@@ -1,6 +1,49 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
+export const postFeedback = (firstname, lastname, telnum, email, agree, contactType, message) => (dispatch) => {
+   console.log("FIRSTNAME IN FEEDBACK IS", firstname);
+
+   const newFeedback = {
+        firstname: firstname,
+        lastname: lastname,
+        telnum: telnum,
+        email: email,
+        agree: agree,
+        contactType: contactType,
+        message: message
+   };
+
+   console.log("FEEDBACK WRITTEN NEW",newFeedback);
+   newFeedback.date = new Date().toISOString();
+   console.log("FEEDBACK WRITTEN NEW",newFeedback);
+
+   return fetch(baseUrl + 'feedback', {
+        method: "POST",
+        body: JSON.stringify(newFeedback),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+   })
+   .then(response => {
+        if (response.ok) {
+          alert("Feedback was posted ok: ", response);
+          console.log("FINAL FEEDBACK", response.json());
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            throw error;
+      })
+   .then(response => response.json())
+   .catch(error =>  { console.log('post feedback failed with message: ', error.message); alert('Your feedback could not be posted\nError: '+error.message); });
+};
+
 export const addComment = (comment) => ({
     type: ActionTypes.ADD_COMMENT,
     payload: comment
@@ -15,6 +58,7 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
         comment: comment
     };
     newComment.date = new Date().toISOString();
+    console.log("newComment is: ", newComment);
 
     return fetch(baseUrl + 'comments', {
         method: "POST",
@@ -26,6 +70,7 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     })
     .then(response => {
         if (response.ok) {
+
           return response;
         } else {
           var error = new Error('Error ' + response.status + ': ' + response.statusText);
