@@ -26,22 +26,23 @@ export const postFeedback = (firstname, lastname, telnum, email, agree, contactT
         },
         credentials: "same-origin"
    })
-   .then(response => {
-        if (response.ok) {
-          alert("Feedback was posted ok: ", response);
-          console.log("FINAL FEEDBACK", response.json());
-          return response;
-        } else {
-          var error = new Error('Error ' + response.status + ': ' + response.statusText);
-          error.response = response;
-          throw error;
-        }
-      },
-      error => {
-            throw error;
-      })
-   .then(response => response.json())
-   .catch(error =>  { console.log('post feedback failed with message: ', error.message); alert('Your feedback could not be posted\nError: '+error.message); });
+      .then(response => {
+           if (response.ok) {
+             fetch(baseUrl + 'feedback')
+                 .then(response => response.json())
+                 .then(body => console.log("New Feedback has been posted succesfully and is: ", JSON.stringify(body[body.length-1])))
+             return response;
+           } else {
+             var error = new Error('Error ' + response.status + ': ' + response.statusText);
+             error.response = response;
+             throw error;
+           }
+         },
+         error => {
+               throw error;
+         })
+      .then(response => response.json())
+      .catch(error =>  { console.log('post feedback failed with message: ', error.message); alert('Your feedback could not be posted\nError: '+error.message); });
 };
 
 export const addComment = (comment) => ({
