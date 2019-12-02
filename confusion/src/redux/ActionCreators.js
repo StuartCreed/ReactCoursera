@@ -2,7 +2,6 @@ import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
 export const postFeedback = (firstname, lastname, telnum, email, agree, contactType, message) => (dispatch) => {
-   console.log("FIRSTNAME IN FEEDBACK IS", firstname);
 
    const newFeedback = {
         firstname: firstname,
@@ -30,7 +29,7 @@ export const postFeedback = (firstname, lastname, telnum, email, agree, contactT
            if (response.ok) {
              fetch(baseUrl + 'feedback')
                  .then(response => response.json())
-                 .then(body => console.log("New Feedback has been posted succesfully and is: ", JSON.stringify(body[body.length-1])))
+                 .then(body => alert("New Feedback has been posted successfully and is: "+ JSON.stringify(body[body.length-1])))
              return response;
            } else {
              var error = new Error('Error ' + response.status + ': ' + response.statusText);
