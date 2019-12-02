@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderLeader({leader}) {
    console.log("ACTUALLY IN RENDER LEADER", leader)
@@ -59,7 +60,9 @@ function About(props) {
    const leaders = props.leaders.map((item) => {
        console.log("ABOUT LEADERS IS ", item)
        return (
-           <RenderLeader leader={item} />
+         <Fade in>
+            <RenderLeader leader={item} />
+         </Fade>
        );
    });
 
@@ -120,7 +123,13 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        <LeadersHandler leadersLoaded={leaders} isLoading={props.leadersLoading} errMess={props.leaderErrMess}/>
+                        <FadeTransform
+                           in
+                           transformProps={{
+                              exitTransform: 'scale(0.5) translateY(-50%)'
+                           }}>
+                              <LeadersHandler leadersLoaded={leaders} isLoading={props.leadersLoading} errMess={props.leaderErrMess}/>
+                        </FadeTransform>
                     </Media>
                 </div>
             </div>
